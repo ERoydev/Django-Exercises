@@ -3,6 +3,20 @@ from django.db import models
 # Create your models here.
 
 
+class Project(models.Model):
+    name = models.CharField(max_length=30)
+
+    code_name = models.CharField(
+        max_length=10,
+        unique=True,
+    )
+
+    deadline = models.DateField()
+
+    def __str__(self):
+        return f"{self.name} with Deadline: {self.deadline}"
+
+
 class Department(models.Model):
 
     role = models.CharField(
@@ -62,5 +76,37 @@ class Employee(models.Model):
         on_delete=models.CASCADE,
     )
 
+    project = models.ManyToManyField(
+        to=Project,
+        related_name='employees',
+    )
+
     def __str__(self):
         return f"Id: {self.id} Name: {self.first_name} {self.last_name}"
+
+
+class AccessCard(models.Model):
+    employee = models.OneToOneField(
+        to=Employee,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+
+class Category(models.Model):
+    name = models.CharField(
+        max_length=15,
+    )
+
+    parent_category = models.ForeignKey(
+        to='Category',
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+    )
+
+class EmployeeProject(models.Model):
+    employee_id = models.ForeignKey(Employee, on_delete=models.RESTRICT)
+    project_id = models.ForeignKey(Project, on_delete=models.RESTRICT)
+
+    date_joined = models.DateField(auto_now_add=True)
