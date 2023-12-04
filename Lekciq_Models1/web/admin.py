@@ -6,8 +6,28 @@ from web.models import Employee, Department, Project, Category
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'first_name', 'level')
+    list_display = ('pk', 'first_name', 'level', 'department')
     list_filter = ('level', 'department')
+    search_fields = ('first_name', 'last_name')
+
+    fieldsets= (
+        ('Personal Info',
+         {
+             'fields': ('first_name', 'last_name', 'age'),
+         }
+         ),
+        ('Advanced options',
+         {
+             'fields': ('level', 'years_of_experience'),
+         }
+         ),
+
+        ('Company Info',
+        {
+            'fields': ('department', 'is_full_time',),
+        }
+        )
+    )
 
 
 @admin.register(Department)
