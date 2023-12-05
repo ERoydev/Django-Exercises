@@ -9,6 +9,60 @@
 </head>
 <body>
     <h1>im on index page</h1>
+    <br>
+
+    <div>
+        {% for employee in employees %}
+            <li>
+                <div>
+                    Info: {{ employee.first_name }} {{ employee.last_name }} is {{ employee.age }} years old
+                </div>
+                <div>
+                    Department name: {{ employee.department.role }}
+                </div>
+                <div>
+                    Years of experience: {{ employee.years_of_experience }}
+                </div>
+            </li>
+        {% endfor %}
+    </div>
+
+    <h1>With Filter Below:</h1>
+    <br>
+    <div>
+        {% for employee in employees2 %}
+            <li>
+                <div>
+                    Info: {{ employee.first_name }} {{ employee.last_name }} is {{ employee.age }} years old
+                </div>
+                <div>
+                    Department name: {{ employee.department.role }}
+                </div>
+                <div>
+                    Years of experience: {{ employee.years_of_experience }}
+                </div>
+            </li>
+        {% endfor %}
+    </div>
+
+<h1>Filter __name='Engineering':</h1>
+    <br>
+    <div>
+        {% for employee in employees2 %}
+            <li>
+                <div>
+                    Info: {{ employee.first_name }} {{ employee.last_name }} is {{ employee.age }} years old
+                </div>
+                <div>
+                    Department name: {{ employee.department.role }}
+                </div>
+                <div>
+                    Years of experience: {{ employee.years_of_experience }}
+                </div>
+            <a href="{% url 'delete_employee' pk=employee.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </div>
 
 </body>
 </html>

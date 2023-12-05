@@ -13,7 +13,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     fieldsets= (
         ('Personal Info',
          {
-             'fields': ('first_name', 'last_name', 'age'),
+             'fields': ('first_name', 'last_name', 'age', 'phone_number', 'email'),
          }
          ),
         ('Advanced options',

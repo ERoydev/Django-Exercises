@@ -52,17 +52,16 @@ class Employee(models.Model):
 
     years_of_experience = models.PositiveIntegerField()
 
-    review = models.TextField()
+    review = models.TextField(
+        null=True, blank=True,
+    )
 
     is_full_time = models.BooleanField(
         null=True
     )
 
-    start_date = models.DateField()
-
     email = models.EmailField(
         unique=True,
-        editable=False,
     )
 
     age = models.IntegerField()
@@ -104,6 +103,7 @@ class Category(models.Model):
         null=True,
         blank=True,
     )
+
 
 class EmployeeProject(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.RESTRICT)
