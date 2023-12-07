@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Employee, Department, Person
-from .forms import RegisterForms
+from .forms import RegisterForms, LoginForms
 
 
 def home(request):
@@ -34,8 +34,9 @@ def department_details(request, pk, slug):
     return render(request, 'department_details.html', context)
 
 
-def forms_demo(request):
+def forms_register(request):
     error = None
+    success = None
     if request.method == "GET":
         form = RegisterForms()
 
@@ -52,12 +53,39 @@ def forms_demo(request):
                     username=username,
                     password=encrypted_password,
                 )
+                success = "You registered successfully!"
             else:
                 error = "Passwords do not match!"
-                print('mistake paswwords')
 
     context = {
         'form': form,
         'error': error,
+        'success': success,
     }
-    return render(request, 'forms.html', context)
+    return render(request, 'form_register.html', context)
+
+
+def forms_login(request):
+    error, success = None, None
+
+    if request.method == "GET":
+        form = LoginForms()
+
+    else:
+        form = LoginForms(request.POST)
+        if form.is_valid():
+            input_password = form.cleaned_data['password']
+            user = Person.objects.filter(username=form.cleaned_data['username'])[0]
+
+            if Person.check_password(input_password, user.password):
+                success = "You have logged in successfully!"
+
+            else:
+                error = 'Username or password is not correct. Please, try again!'
+
+    context = {
+        'form': form,
+        'error': error,
+        'success': success,
+    }
+    return render(request, 'form_login.html', context)

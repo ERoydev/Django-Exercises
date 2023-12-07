@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" action="{% url 'forms_register' %}">
+        {% csrf_token %}
+            {{ form.as_div }}
+            <button class="btn btn-forms">Submit</button>
+        </form>
+    </div>
+    {% if error %}
+            <p style="font-size: 16px; color: red;" >{{ error }}</p>
+        {% endif %}
+
+    {% if success %}
+            <p style="font-size: 16px; color: green;" >{{ success }}</p>
+        {% endif %}
+
+{% endblock %}

@@ -17,7 +17,13 @@ class Person(models.Model):
         hash_password = hash_object.hexdigest()
         return hash_password
 
+    @staticmethod
+    def check_password(input_password, stored_hash):
+        hash_object = hashlib.sha256()
+        hash_object.update(input_password.encode())
+        input_hash = hash_object.hexdigest()
 
+        return input_hash == stored_hash
 
 class AuditInfoMixin(models.Model):
     class Meta:
