@@ -1,0 +1,22 @@
+
+h1{
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-bottom: 50px;
+    border-bottom: 2px solid black;
+}
+
+.btn-forms {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+    background-color: #afafaf;
+    padding: 15px 15px;
+    border-radius: 15px;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+
+.btn-forms:hover {
+    color: purple;
+}

@@ -1,9 +1,19 @@
 from django.db import models
-
+from django.urls import reverse
+from django.template.defaultfilters import slugify
 # Create your models here.
 
 
-class Project(models.Model):
+class AuditInfoMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    updated_on = models.DateTimeField(auto_now=True)
+
+
+class Project(AuditInfoMixin, models.Model):
     name = models.CharField(max_length=30)
 
     code_name = models.CharField(
@@ -17,7 +27,15 @@ class Project(models.Model):
         return f"{self.name} with Deadline: {self.deadline}"
 
 
-class Department(models.Model):
+class Department(AuditInfoMixin, models.Model):
+
+    slug_field = models.CharField(max_length=1000, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug_field:
+            self.slug_field = slugify(self.role)
+
+        return super().save(*args, **kwargs)
 
     role = models.CharField(
         max_length=50,
@@ -29,10 +47,20 @@ class Department(models.Model):
     )
 
     def __str__(self):
-        return f"{self.role}"
+        return f"Role: {self.role} Salary: {self.salary}"
 
+    def get_absolute_url(self):
+        return reverse('department_details', kwargs={
+            'pk': self.pk,
+            'slug': self.slug_field,
 
-class Employee(models.Model):
+    })
+
+class Employee(AuditInfoMixin, models.Model):
+
+    class Meta:
+        ordering = ('-years_of_experience', 'age')
+
     first_name = models.CharField(max_length=60)
 
     last_name = models.CharField(max_length=60)
@@ -66,10 +94,6 @@ class Employee(models.Model):
 
     age = models.IntegerField()
 
-    created_on = models.DateTimeField(auto_now_add=True)
-
-    updated_on = models.DateTimeField(auto_now=True)
-
     department = models.ForeignKey(
         to=Department,
         on_delete=models.CASCADE,
@@ -79,6 +103,10 @@ class Employee(models.Model):
         to=Project,
         related_name='employees',
     )
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
         return f"Id: {self.id} Name: {self.first_name} {self.last_name}"
@@ -93,6 +121,10 @@ class AccessCard(models.Model):
 
 
 class Category(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(
         max_length=15,
     )
