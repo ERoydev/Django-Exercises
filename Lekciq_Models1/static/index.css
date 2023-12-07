@@ -1,27 +1,35 @@
-
-h1{
+* {
     font-family: sans-serif;
     font-weight: 500;
+    margin-left: 5px;
+}
+
+h1{
     margin-bottom: 50px;
     border-bottom: 2px solid black;
 }
 
-.btn-forms {
+.btn-forms{
     margin-left: 20px;
     text-decoration: none;
     color: black;
     background-color: #afafaf;
     padding: 15px 15px;
     border-radius: 15px;
-    font-weight: 500;
-    font-family: sans-serif;
 }
 
 .navbar {
     margin-top: 50px;
     margin-bottom: 50px;
+    justify-content: flex-start;
+    gap: 40px;
 }
 
 .btn-forms:hover {
     color: purple;
+}
+
+.col-name {
+    font-size: 19px;
+    color: #18183d;
 }

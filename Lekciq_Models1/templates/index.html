@@ -6,58 +6,74 @@
     <h1>This is Index Page for Models Demo's</h1>
 
     <div>
-            {% for employee in employees %}
-                <li>
-                    <div>
-                        <a href="{% url 'department_details' pk=employee.department.pk slug=employee.department.slug_field %}">{{employee.department.role }}</a>
-                        Info: {{ employee.first_name }} {{ employee.last_name }} is {{ employee.age }} years old
-                    </div>
-                    <div>
-                        Department name: {{ employee.department.role }}
-                    </div>
-                    <div>
-                        Years of experience: {{ employee.years_of_experience }}
-                    </div>
-                </li>
-            {% endfor %}
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col" class="col-name">Department</th>
+                  <th scope="col" class="col-name">Full Name</th>
+                  <th scope="col" class="col-name">Age</th>
+                  <th scope="col" class="col-name">Years of experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                        <tr>
+                          <th scope="row"><a href="{% url 'department_details' pk=employee.department.pk slug=employee.department.slug_field %}">{{employee.department.role }}</a></th>
+                          <td>{{ employee.full_name }}</td>
+                          <td>{{ employee.age }}</td>
+                          <td>{{ employee.years_of_experience }}</td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-        <h1>With Filter Below:</h1>
-        <br>
-        <div>
-            {% for employee in employees2 %}
-                <li>
-                    <div>
-                        <a href="{% url 'department_details' pk=employee.department.pk slug=employee.department.slug_field %}">{{employee.department.role }}</a>
-                        Info: {{ employee.full_name }} is {{ employee.age }} years old
-                    </div>
-                    <div>
-                        Department name: {{ employee.department.role }}
-                    </div>
-                    <div>
-                        Years of experience: {{ employee.years_of_experience }}
-                    </div>
-                </li>
-            {% endfor %}
-        </div>
+    <h2>With Filter Below:</h2>
+   <div>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col" class="col-name">Department</th>
+                  <th scope="col" class="col-name">Full Name</th>
+                  <th scope="col" class="col-name">Age</th>
+                  <th scope="col" class="col-name">Years of experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees2 %}
+                        <tr>
+                          <th scope="row"><a href="{% url 'department_details' pk=employee.department.pk slug=employee.department.slug_field %}">{{employee.department.role }}</a></th>
+                          <td>{{ employee.full_name }}</td>
+                          <td>{{ employee.age }}</td>
+                          <td>{{ employee.years_of_experience }}</td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <h1>Filter __name='Engineering':</h1>
-        <br>
-        <div>
-            {% for employee in employees2 %}
-                <li>
-                    <div>
-                        <a href="{% url 'department_details' pk=employee.department.pk slug=employee.department.slug_field %}">{{employee.department.role }}</a>
-                        Info: {{ employee.full_name }} is {{ employee.age }} years old
-                    </div>
-                    <div>
-                        Department name: {{ employee.department.role }}
-                    </div>
-                    <div>
-                        Years of experience: {{ employee.years_of_experience }}
-                    </div>
-                <a href="{% url 'delete_employee' pk=employee.pk %}">Delete</a>
-                </li>
-            {% endfor %}
-        </div>
+<h2>Filter => department__role='Engineering':</h2>
+    <br>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col" class="col-name">Department</th>
+                  <th scope="col" class="col-name">Full Name</th>
+                  <th scope="col" class="col-name">Age</th>
+                  <th scope="col" class="col-name">Years of experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees3 %}
+                        <tr>
+                          <th scope="row"><a href="{% url 'department_details' pk=employee.department.pk slug=employee.department.slug_field %}">{{employee.department.role }}</a></th>
+                          <td>{{ employee.full_name }}</td>
+                          <td>{{ employee.age }}</td>
+                          <td>{{ employee.years_of_experience }}</td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
