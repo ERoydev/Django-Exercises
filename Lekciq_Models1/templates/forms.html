@@ -2,7 +2,15 @@
 {% load static %}
 
 {% block content %}
-    <h1>This is Forms Page!</h1>
-    {{ form }}
+    <div class="container">
+        <form method="POST" action="{% url 'forms_demo' %}">
+        {% csrf_token %}
+            {{ form.as_div }}
+            <button class="btn btn-forms">Submit</button>
+        </form>
+    </div>
+    {% if error %}
+            <p style="font-size: 16px; color: red;" >{{ error }}</p>
+        {% endif %}
 
 {% endblock %}

@@ -6,7 +6,7 @@
 
 h1{
     margin-bottom: 50px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid #858585;
 }
 
 .btn-forms{
@@ -14,7 +14,7 @@ h1{
     text-decoration: none;
     color: black;
     background-color: #afafaf;
-    padding: 15px 15px;
+    padding: 10px 10px;
     border-radius: 15px;
 }
 
@@ -26,10 +26,27 @@ h1{
 }
 
 .btn-forms:hover {
-    color: purple;
+    color: #dadada;
+    background-color: #000000;
 }
 
 .col-name {
     font-size: 19px;
     color: #18183d;
+}
+
+.container {
+    width: 500px;
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px 12px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+input:focus {
+  border: 3px solid #6e7dc0 !important;
 }

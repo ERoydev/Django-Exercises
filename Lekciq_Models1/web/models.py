@@ -1,7 +1,22 @@
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+import hashlib
+
 # Create your models here.
+
+
+class Person(models.Model):
+    username = models.CharField(max_length=50)
+    password = models.CharField()
+
+    @staticmethod
+    def set_password(password):
+        hash_object = hashlib.sha256()
+        hash_object.update(password.encode())
+        hash_password = hash_object.hexdigest()
+        return hash_password
+
 
 
 class AuditInfoMixin(models.Model):

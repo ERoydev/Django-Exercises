@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Employee, Department
-from .forms import NameForms
+from .models import Employee, Department, Person
+from .forms import RegisterForms
 
 
 def home(request):
@@ -35,7 +35,29 @@ def department_details(request, pk, slug):
 
 
 def forms_demo(request):
+    error = None
+    if request.method == "GET":
+        form = RegisterForms()
+
+    else:
+        form = RegisterForms(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            confirm_password = form.cleaned_data['confirm_password']
+
+            if password == confirm_password:
+                encrypted_password = Person.set_password(password)
+                Person.objects.create(
+                    username=username,
+                    password=encrypted_password,
+                )
+            else:
+                error = "Passwords do not match!"
+                print('mistake paswwords')
+
     context = {
-        'form': NameForms(),
+        'form': form,
+        'error': error,
     }
     return render(request, 'forms.html', context)
