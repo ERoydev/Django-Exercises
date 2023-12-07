@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 <body>
-    <h1>This is the Home Page!</h1>
-    <a href="{% url 'index' %}" class="btn-forms">Go To Models Demo's Page! :)</a>
-    <a href="{% url 'forms_demo' %}" class="btn-forms">Go To Forms Demo's Page! :)</a>
+    {% include 'includes/navbar.html'%}
+
+    {% block content %}
+    {% endblock %}
 
 </body>
 </html>

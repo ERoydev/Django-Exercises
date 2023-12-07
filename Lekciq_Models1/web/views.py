@@ -1,9 +1,16 @@
+from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Employee, Department
 
 
+class NameForms(forms.Form):
+    username = forms.CharField(label="Username", max_length=50)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+
 def home(request):
     return render(request, 'base.html')
+
 
 def index(request):
     employees = Employee.objects.all()
@@ -33,4 +40,8 @@ def department_details(request, pk, slug):
 
 
 def forms_demo(request):
-    return render(request, 'forms.html')
+    context = {
+        'form': NameForms(),
+    }
+
+    return render(request, 'forms.html', context)

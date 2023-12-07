@@ -17,6 +17,11 @@ h1{
     font-family: sans-serif;
 }
 
+.navbar {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 .btn-forms:hover {
     color: purple;
 }
