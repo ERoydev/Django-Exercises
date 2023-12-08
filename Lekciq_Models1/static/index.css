@@ -4,13 +4,31 @@
     margin-left: 5px;
 }
 
+body {
+    background-image: url("media/abstract_bg.jpg");
+}
+
 h1{
     margin-bottom: 50px;
     border-bottom: 1px solid #858585;
 }
 
+form {
+    display: grid;
+}
+
+
+#id_gender {
+    margin-left: 5px;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 2px 10px;
+    z-index: 1;
+}
+
 .btn-forms{
-    margin-left: 20px;
+    margin-top: 10px;
     text-decoration: none;
     color: black;
     background-color: #afafaf;
@@ -50,3 +68,4 @@ input {
 input:focus {
   border: 3px solid #6e7dc0 !important;
 }
+

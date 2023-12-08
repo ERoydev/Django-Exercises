@@ -6,9 +6,24 @@ import hashlib
 # Create your models here.
 
 
+class Pet(models.Model):
+    MAX_NAME_LENGTH = 30
+    name = models.CharField(
+        max_length=MAX_NAME_LENGTH
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Person(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField()
+    age = models.PositiveIntegerField()
+
+    pets = models.ManyToManyField(
+        Pet,
+    )
 
     @staticmethod
     def set_password(password):

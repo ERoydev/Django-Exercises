@@ -1,7 +1,11 @@
 from django.contrib import admin
-from web.models import Employee, Department, Project, Category
+from web.models import Employee, Department, Project, Category, Pet
 
 # Register your models here.
+
+@admin.register(Pet)
+class PetAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Employee)

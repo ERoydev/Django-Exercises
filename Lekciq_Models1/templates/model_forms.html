@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <form action="{% url 'model_forms' %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-forms">Create</button>
+        </form>
+    </div>
+{% endblock %}

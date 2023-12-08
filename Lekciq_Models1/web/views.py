@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Employee, Department, Person
-from .forms import RegisterForms, LoginForms
+from .forms import RegisterForms, LoginForms, PersonForm
 
 
 def home(request):
@@ -89,3 +89,24 @@ def forms_login(request):
         'success': success,
     }
     return render(request, 'form_login.html', context)
+
+
+def model_forms(request):
+    if request.method == 'GET':
+        form = PersonForm()
+    else:
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            pets = form.cleaned_data.pop('pets')
+            person = Person.objects.create(
+                **form.cleaned_data
+            )
+
+            person.pets.set(pets)
+            person.save()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'model_forms.html', context)
