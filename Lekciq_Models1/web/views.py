@@ -1,6 +1,31 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import Employee, Department, Person
-from .forms import RegisterForms, LoginForms, PersonForm
+from .forms import RegisterForms, LoginForms, PersonForm, ToDoForm
+
+
+def validate_text(value):
+    pass
+    # if valid:
+    #   do nothing
+    # else:
+    #   raise ValidationException()
+
+
+def todos(request):
+    if request.method == "GET":
+        form = ToDoForm()
+
+    else:
+        form = ToDoForm(request.POST)
+
+        if form.is_valid():
+            return HttpResponse('All is valid')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'todos.html', context)
 
 
 def home(request):

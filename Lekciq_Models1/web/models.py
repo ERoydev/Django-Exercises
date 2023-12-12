@@ -40,6 +40,7 @@ class Person(models.Model):
 
         return input_hash == stored_hash
 
+
 class AuditInfoMixin(models.Model):
     class Meta:
         abstract = True
@@ -91,6 +92,7 @@ class Department(AuditInfoMixin, models.Model):
             'slug': self.slug_field,
 
     })
+
 
 class Employee(AuditInfoMixin, models.Model):
 

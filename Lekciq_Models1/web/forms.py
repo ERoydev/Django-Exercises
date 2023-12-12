@@ -2,6 +2,13 @@ from django import forms
 from .models import Person
 
 
+class ToDoForm(forms.Form):
+    text = forms.CharField()
+    is_done = forms.BooleanField(
+        required=False,
+    )
+
+
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person

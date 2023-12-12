@@ -9,4 +9,5 @@ urlpatterns = [
     path('forms_register/', views.forms_register, name='forms_register'),
     path('forms_login/', views.forms_login, name='forms_login'),
     path('model_forms/', views.model_forms, name='model_forms'),
+    path('todos/', views.todos, name='todos'),
 ]
